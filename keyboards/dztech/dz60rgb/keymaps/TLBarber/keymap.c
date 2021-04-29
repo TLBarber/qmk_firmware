@@ -52,10 +52,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [2] = LAYOUT(
         RGB_TOG, KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   KC_F19,   KC_F20,   KC_F21,   KC_F22,  RGB_SAD,  RGB_SAI,  KC_DEL,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_HUD, RGB_HUI, RESET,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          EEP_RST,
+        _______, TO(1), _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_HUD, RGB_HUI, RESET,
+        _______, _______, _______, TO(3), _______, _______, _______, _______, _______, _______, _______, _______,          EEP_RST,
         _______,          _______, _______, _______, _______, _______, _______, _______, RGB_SPD, RGB_SPI, _______, RGB_VAI, _______,
         _______, _______, _______,                            _______,                   _______, _______, RGB_RMOD, RGB_VAD, RGB_MOD
+    ),
+    [3] = LAYOUT(
+        KC_DLR, KC_AMPR, KC_LBRC, KC_LCBR, KC_RCBR, KC_LPRN, KC_EQL, KC_ASTR, KC_RPRN, KC_PLUS, KC_RBRC, KC_EXLM, KC_HASH, KC_BSPC,
+        LT(1, KC_TAB), KC_SCLN, KC_COMM, KC_DOT, KC_P, KC_Y, KC_F, KC_G, KC_C, KC_R, KC_L, KC_SLSH, KC_AT, KC_BSLS,
+        KC_CAPS, KC_A, KC_O, KC_E, KC_U, KC_I, KC_D, KC_H, KC_T, KC_N, KC_S, KC_MINS, KC_ENT,
+        KC_LSFT, KC_QUOT, KC_Q, KC_J, KC_K, KC_X, KC_B, KC_M, KC_W, KC_V, RSFT_T(KC_Z), KC_UP, LT(2, KC_DEL),
+        KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, RALT_T(KC_RGUI), LT(1, KC_PSCREEN), KC_LEFT, KC_DOWN, KC_RGHT
     )
 };
 
