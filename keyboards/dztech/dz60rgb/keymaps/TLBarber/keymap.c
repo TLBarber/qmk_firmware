@@ -101,5 +101,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LT(3, KC_MEDIA_PLAY_PAUSE),     KC_S,    KC_H,    KC_N,    KC_T,    KC_COMM, KC_DOT,  KC_A,    KC_E,    KC_O,    KC_I,          KC_QUOT,                  KC_ENT,
         KC_LSFT,                        KC_F,    KC_M,    KC_V,    KC_C,    KC_SLSH, KC_G,    KC_P,    KC_X,    KC_K,    RSFT_T(KC_Y),  KC_UP,   LT(2, KC_DEL),
         KC_LCTL,        KC_LGUI, KC_LALT,                      KC_SPC,                    RALT_T(KC_RGUI), TO(1),  KC_LEFT, KC_DOWN, KC_RGHT
+
     )
 };
