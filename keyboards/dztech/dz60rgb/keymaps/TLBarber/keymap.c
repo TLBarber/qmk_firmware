@@ -2,8 +2,8 @@
 --Layer 0--
   ____________________________________________________________________________________________________________________
  |[ESC~]             [1!]-[2@]-[3#]-[4$]-[5%]-[6^]-[7&]-[8*]-[9(]-[0)]-[-_]-[+=]                       [  BackSpace  ]|
- |[ Tab/OSL(3) ]        [Q]-[W]-[E]-[R]-[T]-[Y]-[U]-[I]-[O]-[P]-[[{]-[]}]                                   [   |\   ]|
- |[ctrl]                 [A]-[S]-[D]-[F]-[G]-[H]-[J]-[K]-[L]-[;/:]-['/"]                                  [   Enter  ]|
+ |[ Tab/OSL(2) ]        [Q]-[W]-[E]-[R]-[T]-[Y]-[U]-[I]-[O]-[P]-[[{]-[]}]                                   [   |\   ]|
+ |[PLAY-PAUSE/OSL(3)]    [A]-[S]-[D]-[F]-[G]-[H]-[J]-[K]-[L]-[;/:]-['/"]                                  [   Enter  ]|
  |[ Shift ]               [Z]-[X]-[C]-[V]-[B]-[N]-[M]-[</,]-[>/.]-[?//OSL(RSHFT)]                      [↑][del/OSL(2)]|
  |[ctrl][win][alt]        [____________________SPACE__________________][prtscr/OSL(alt)][win/OSL(1)][←][↓][   →   ]   |
  |____________________________________________________________________________________________________________________|
@@ -30,37 +30,64 @@
  |[   ▼   ]                  [▼]-[▼]-[▼]-[▼]-[▼]-[▼]-[▼]-[RGBSpd-]-[RGBSpd+]-[▼]    [Brt+][   ▼   ]|
  |[  ▼  ][ ▼ ][▼]             [_________________▼__________________] [▼][▼][RGBMod-][Brt-][RGBMod+]|
  |_________________________________________________________________________________________________|
+
+--Layer 3--
+  __________________________________________________________________________________________________
+ |[RGBTOGG] [F13]-[F14]-[F15]-[F16]-[F17]-[F18]-[F19]-[F20]-[F21]-[F22]-[SAT-]-[SAT+]  [    DEL    ]|
+ |[ ▼ ]                  [lclick]-[MS-up]]-[rclick]-[▼]-[▼]-[▼]-[▼]-[▼]-[▼]-[▼]-[HUE-]-[HUE+][ RST ]|
+ |[    ▼    ]              [MS-left]-[MS-down]-[MS-right]-[▼]-[▼]-[▼]-[▼]-[▼]-[▼]-[▼]-[▼][CLREEPROM]|
+ |[   ▼   ]                  [▼]-[▼]-[▼]-[▼]-[▼]-[▼]-[▼]-[RGBSpd-]-[RGBSpd+]-[▼]    [sclup][   ▼   ]|
+ |[  ▼  ][ ▼ ][▼]             [___________TSTMACRO____________] [▼][▼][sclleft][scldown][sclright]  |
+ |__________________________________________________________________________________________________|
+
+
 */
 
 #include QMK_KEYBOARD_H
 
+enum{
+    TEST_MACRO = SAFE_RANGE,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record){
+    if(record->event.pressed){
+        switch(keycode){
+            case TEST_MACRO:
+            SEND_STRING("This is a test");
+            return false;
+            break;
+        }
+    }
+    return true;
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        KC_GESC,        KC_1,    KC_2,            KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,         KC_EQL,  KC_BSPC,
+        KC_GRAVE,        KC_1,    KC_2,            KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,         KC_EQL,  KC_BSPC,
         LT(2, KC_TAB),         KC_Q,    KC_W,            KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,         KC_RBRC, KC_BSLS,
         LT(3, KC_MEDIA_PLAY_PAUSE), KC_A,    KC_S,            KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,                  KC_ENT,
         KC_LSFT,                 KC_Z,            KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  RSFT_T(KC_SLSH), KC_UP,   LT(2, KC_DEL),
         KC_LCTL,        KC_LGUI, KC_LALT,                      KC_SPC,                    RALT_T(KC_RGUI), LT(1, KC_PSCREEN),   KC_LEFT,         KC_DOWN, KC_RGHT
     ),
     [1] = LAYOUT(
-        KC_GRAVE,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,
-        _______, _______, _______, _______, _______, _______, _______, _______, KC_INS,  _______, _______, _______, _______, RESET,
-        KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PGUP,          EEP_RST,
-        _______,          _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_END,  KC_PGDN, KC_VOLU, KC_MUTE,
-        _______, _______, _______,                 KC_MEDIA_PLAY_PAUSE,                   _______, _______, KC_MPRV, KC_VOLD, KC_MNXT
+        KC_GESC,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,
+        KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_INS,  KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, RESET,
+        KC_CAPS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_PGUP,          EEP_RST,
+        KC_TRANS,          KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_HOME, KC_END,  KC_PGDN, KC_VOLU, KC_MUTE,
+        KC_TRANS, KC_TRANS, KC_TRANS,                 KC_MEDIA_PLAY_PAUSE,                   KC_TRANS, KC_TRANS, KC_MPRV, KC_VOLD, KC_MNXT
     ),
     [2] = LAYOUT(
         RGB_TOG, KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   KC_F19,   KC_F20,   KC_F21,   KC_F22,  RGB_SAD,  RGB_SAI,  EEPROM_RESET,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_HUD, RGB_HUI, RESET,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          EEP_RST,
-        _______,          _______, _______, _______, _______, _______, _______, _______, RGB_SPD, RGB_SPI, _______, RGB_VAI, _______,
-        _______, _______, _______,                            _______,                   _______, _______, RGB_RMOD, RGB_VAD, RGB_MOD
+        KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, RGB_HUD, RGB_HUI, RESET,
+        KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS,          EEP_RST,
+        KC_TRANS,          KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, RGB_SPD, RGB_SPI, KC_TRANS, RGB_VAI, KC_TRANS,
+        KC_TRANS, KC_TRANS, KC_TRANS,                            KC_TRANS,                   KC_TRANS, KC_TRANS, RGB_RMOD, RGB_VAD, RGB_MOD
     ),
     [3] = LAYOUT(
-        _______, _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,   _______,  _______,  _______,  EEPROM_RESET,
-        _______, KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2, _______, _______, _______, KC_MS_WH_UP, KC_MS_UP, KC_MS_WH_DOWN, _______, _______, _______,  RESET,
-        _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, _______,       KC_MS_BTN1,
-        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2,
-        _______, _______, _______,                            KC_MS_BTN2,                   _______, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT
+        KC_TRANS, KC_TRANS,   KC_TRANS,   KC_TRANS,   KC_TRANS,   KC_TRANS,   KC_TRANS,   KC_TRANS,   KC_TRANS,   KC_TRANS,   KC_TRANS,  KC_TRANS,  KC_TRANS,  KC_TRANS,
+        KC_TRANS, KC_MS_BTN1, KC_MS_UP, KC_MS_BTN2, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS,  KC_TRANS,
+        KC_TRANS, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS,       KC_TRANS,
+        KC_TRANS,          KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_TRANS, KC_MS_WH_UP, KC_TRANS,
+        KC_TRANS, KC_TRANS, KC_TRANS,                            TEST_MACRO,                   KC_TRANS, KC_TRANS, KC_MS_WH_LEFT, KC_MS_WH_DOWN, KC_MS_WH_RIGHT
     )
 };
