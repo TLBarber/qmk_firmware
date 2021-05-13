@@ -1,9 +1,7 @@
-
 //Mousekeys configuration
 //#define MK_3_SPEED
 //#define MK_C_OFFSET_UNMOD 32
 //#define MK_C_INTERVAL_UNMOD 16
-
 
 #ifdef RGB_MATRIX_ENABLE
 // #define DISABLE_RGB_MATRIX_SOLID_COLOR // Disables RGB_MATRIX_SOLID_COLOR
