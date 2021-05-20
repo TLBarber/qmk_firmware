@@ -1,1 +1,1 @@
-# The default keymap for idobo
+# Aarkleon's keymap for idobo 75
